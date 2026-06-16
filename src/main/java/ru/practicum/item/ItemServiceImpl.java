@@ -11,14 +11,14 @@ public class ItemServiceImpl implements ItemService {
     private final ItemRepository repository;
 
     @Override
-    public List<Item> getItems(long userId) {
-        return repository.findByUserId(userId);
+    public List<ItemDTO> getItems(long userId) {
+        return ItemDTO.fromList(repository.findByUserId(userId));
     }
 
     @Override
-    public Item addNewItem(long userId, Item item) {
+    public ItemDTO addNewItem(long userId, Item item) {
         item.setUserId(userId);
-        return repository.save(item);
+        return ItemDTO.from(repository.save(item));
     }
 
     @Override

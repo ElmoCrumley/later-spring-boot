@@ -1,18 +1,20 @@
 package ru.practicum.item;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Getter @Setter
+import java.util.HashSet;
+import java.util.Set;
+
+@Getter @Setter @ToString
 @Entity
 @Table(name = "items", schema = "public")
 class Item {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "userId", nullable = false)
@@ -20,4 +22,21 @@ class Item {
 
     @Column(name = "url")
     private String url;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name="tags", joinColumns=@JoinColumn(name="item_id"))
+    @Column(name="name")
+    private Set<String> tags = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Item)) return false;
+        return id != null && id.equals(((Item) o).getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }
