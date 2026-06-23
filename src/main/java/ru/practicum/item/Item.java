@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import ru.practicum.user.User;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,14 +12,15 @@ import java.util.Set;
 @Getter @Setter @ToString
 @Entity
 @Table(name = "items", schema = "public")
-class Item {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "userId", nullable = false)
-    private Long userId;
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    private User user;
 
     @Column(name = "url")
     private String url;
