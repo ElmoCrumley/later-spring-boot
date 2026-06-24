@@ -18,7 +18,7 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
     private User user;
 
@@ -27,7 +27,7 @@ public class Item {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="tags", joinColumns=@JoinColumn(name="item_id"))
-    @Column(name="name")
+    @Column(name="name") // в самой таблиц. "item_id :name"
     private Set<String> tags = new HashSet<>();
 
     @Override

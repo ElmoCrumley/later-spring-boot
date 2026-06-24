@@ -21,7 +21,7 @@ public class ItemNote {
     @Size(max = 2000, message = "Максимальная длина text — 2000 символов")
     String text;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id")
     Item item;
 
