@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @Getter @Setter @ToString
@@ -27,6 +30,25 @@ public class ItemNote {
 
     @Column(name = "save_note_date")
     Timestamp saveNoteDate = Timestamp.from(Instant.now());
+
+    public ItemNote(Item item, String text) {
+        this.item = item;
+        this.text = text;
+    }
+
+    String getFormatSaveNoteDate() {
+        return DateTimeFormatter
+                .ofPattern("yyyy.MM.dd, hh:mm:ss")
+                .withZone(ZoneOffset.UTC)
+                .format(saveNoteDate.toInstant());
+    }
+
+    void setFormatSaveNoteDate(String formatSaveNoteDate) {
+        saveNoteDate = Timestamp.from(LocalDateTime.parse(
+                formatSaveNoteDate,
+                DateTimeFormatter.ofPattern("yyyy.MM.dd, HH:mm:ss")
+        ).toInstant(ZoneOffset.UTC));
+    }
 
     @Override
     public boolean equals(Object o) {

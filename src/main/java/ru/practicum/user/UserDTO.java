@@ -15,6 +15,7 @@ public class UserDTO {
 
     public static UserDTO from(User user) {
         UserDTO dto = new UserDTO();
+        dto.id = user.getId();
         dto.name = user.getFullName();
         dto.email = user.getEmail();
         dto.registrationDate = user.getRegistrationDateNote();
