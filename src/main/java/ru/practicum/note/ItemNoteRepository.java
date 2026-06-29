@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface ItemNoteRepository extends JpaRepository<ItemNote, Long> {
 
     // Запросный метод
-    List<ItemNote> findByUserIdAndUrlContaining(Long userId, String url);
+    List<ItemNote> findByItem_User_IdAndItem_UrlContaining(Long userId, String url);
 
     // Аннотированный @Query метод c JPQL-запросом.
     // Можно заменить на ItemDTO с конструктором со всеми полями и

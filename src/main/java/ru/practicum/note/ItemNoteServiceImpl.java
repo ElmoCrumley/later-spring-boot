@@ -25,7 +25,7 @@ public class ItemNoteServiceImpl implements ItemNoteService {
 
     @Override
     public List<ItemNoteDto> searchNotesByUrl(String url, Long userId) {
-        List<ItemNote> itemNotes = repository.findByUserIdAndUrlContaining(userId, url);
+        List<ItemNote> itemNotes = repository.findByItem_User_IdAndItem_UrlContaining(userId, url);
 
         return ItemNoteMapper.mapToItemNoteDto(itemNotes);
     }
