@@ -1,13 +1,15 @@
 package ru.practicum.item;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@Getter @Setter @ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ItemDTO {
-    long id;
+    Long id;
     String url;
 
     public static ItemDTO from(Item item) {

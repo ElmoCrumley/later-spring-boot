@@ -1,17 +1,20 @@
 package ru.practicum.user;
 
-import lombok.AccessLevel;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 import java.util.List;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
+@Getter @Setter @ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserDTO {
-    long id;
+    Long id;
     String name;
     String email;
     String registrationDate;
     String userStateNote;
+    UserState state;
 
     public static UserDTO from(User user) {
         UserDTO dto = new UserDTO();
@@ -20,6 +23,7 @@ public class UserDTO {
         dto.email = user.getEmail();
         dto.registrationDate = user.getRegistrationDateNote();
         dto.userStateNote = user.getUserStateNote();
+        dto.state = user.getState();
         return dto;
     }
 

@@ -2,6 +2,7 @@ package ru.practicum.note;
 
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import lombok.experimental.FieldDefaults;
 import ru.practicum.item.Item;
 import jakarta.persistence.*;
 
@@ -11,10 +12,10 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 @Getter @Setter @ToString
-@Entity
-@Table(name = "item_notes", schema = "public")
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity @Table(name = "item_notes", schema = "public")
 public class ItemNote {
 
     @Id

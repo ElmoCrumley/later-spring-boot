@@ -1,15 +1,13 @@
 package ru.practicum.note;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
-@Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter @ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ItemNoteDto {
-
     Long id;
     Long itemId;
     String text;

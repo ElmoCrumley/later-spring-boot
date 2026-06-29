@@ -1,34 +1,34 @@
 package ru.practicum.item;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import ru.practicum.user.User;
 
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
 @Getter @Setter @ToString
-@Entity
-@Table(name = "items", schema = "public")
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity @Table(name = "items", schema = "public")
 public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", nullable = false)
-    private User user;
+    User user;
 
     @Column(name = "url")
-    private String url;
+    String url;
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="tags", joinColumns=@JoinColumn(name="item_id"))
     @Column(name="name") // в самой таблиц. "item_id :name"
-    private Set<String> tags = new HashSet<>();
+    Set<String> tags = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

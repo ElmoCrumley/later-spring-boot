@@ -1,9 +1,8 @@
 package ru.practicum.user;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 import ru.practicum.item.Item;
 
 import java.time.Instant;
@@ -12,28 +11,29 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
+@NoArgsConstructor
 @Getter @Setter @ToString
-@Entity
-@Table(name = "users", schema = "public")
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Entity @Table(name = "users", schema = "public")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
 
     @Column(name = "firstName", nullable = false)
-    private String firstName;
+    String firstName;
 
     @Column(name = "lastName")
-    private String lastName;
+    String lastName;
 
-    private String email;
+    String email;
 
     @Column(name = "registration_date")
-    private Instant registrationDate = Instant.now();
+    Instant registrationDate = Instant.now();
 
     @Enumerated(EnumType.STRING)
-    private UserState state;
+    UserState state;
 
     String getFullName() {
         return firstName + " " + lastName;
